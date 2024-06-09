@@ -1,0 +1,9 @@
+<div class="rating rating-sm">
+	<input type="radio" disabled class="rating-hidden" 
+    <%= value === 0 ? 'checked' : '' %> />
+
+	<% for (let i = 1; i <= 5; i++) { %> 
+        <input type="radio" disabled class="bg-orange-400 mask mask-star-2" 
+        <%= Math.floor(value) === i ? 'checked' : '' %> />
+    <% } %>
+</div>

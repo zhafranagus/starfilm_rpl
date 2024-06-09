@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Movie Detail</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/css/styles.css" />
+	</head>
+
+	<body class="bg-color-white">
+		<div class="w-full max-w-6xl px-8 mx-auto">
+			<!--  Navbar -->
+			<%- include('../partials/navbar') %>
+
+			<!-- Flash Messages -->
+			<%- include('../partials/flash') %>
+
+			<section class="mb-20">
+				<h1 class="mb-2 text-4xl font-bold font-display">User Reviews</h1>
+				<p class="mb-8 text-base-content/60">
+					Here's your reviews!
+				</p>
+
+				<div class="flex flex-col space-y-4">
+					<%- reviews?.map((review) => include('../partials/review', { review })).join('') %>
+
+					<!-- if no reviews -->
+					<% if (reviews.length === 0) { %>
+					<p class="text-base-content/60">No reviews yet</p>
+					<% } %>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

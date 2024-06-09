@@ -1,0 +1,13 @@
+<% if (error || success) { %>
+<div class="py-6">
+	<% if (error) { %>
+	<p class="text-red-500"><%= error %></p>
+	<% } %>
+
+	<!-- separator -->
+
+	<% if (success) { %>
+	<p class="text-green-500"><%= success %></p>
+	<% } %>
+</div>
+<% } %>

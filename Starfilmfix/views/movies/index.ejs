@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/css/styles.css" />
+	</head>
+
+	<body class="bg-color-white">
+		<div class="w-full max-w-6xl px-8 mx-auto">
+			<!--  Navbar -->
+			<%- include('../partials/navbar') %>
+
+			<!--  Flash Messages -->
+			<%- include('../partials/flash') %>
+
+			<section class="mb-20">
+				<h1 class="mb-2 text-4xl font-bold font-display  ">Search Movies</h1>
+				<p class="mb-8 text-base-content/60">
+					Search your movie!
+				</p>
+
+				<form action="/movies" method="GET">
+					<div class="flex items-center gap-6">
+						<input
+							type="text"
+							name="query"
+							value="<%= query %>"
+							class="w-full input input-bordered"
+							placeholder="Search for a movie..." />
+						<button type="submit" class="btn  btn-primary">Search</button>
+					</div>
+				</form>
+			</section>
+
+			<section class="mb-20">
+				<h1 class="mb-2 text-4xl font-bold font-display">Movies</h1>
+				<p class="mb-8 text-base-content/60">
+					<!-- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam vel libero facilis ut consequuntur
+					quos ex saepe iste. Enim, laudantium. -->
+				</p>
+
+				<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+					<%- movies.results.map((movie) => include('../partials/movie', { movie })).join('') %>
+
+					<!-- if no movies -->
+					<% if (movies.results.length === 0) { %>
+					<p class="text-base-content/60">No movies found</p>
+					<% } %>
+				</div>
+			</section>
+
+			<!-- pagination if query is not empty -->
+			<% if (query) { %>
+			<div class="flex justify-center gap-4">
+				<% if (movies.page > 1) { %>
+				<a href="/movies?query=<%= query %>&page=<%= movies.page - 1 %>" class="btn btn-accent btn-primary">Previous</a>
+				<% } %> <% if (movies.page < movies.total_pages) { %>
+				<a href="/movies?query=<%= query %>&page=<%= movies.page + 1 %>" class="btn btn-accent btn-primary">Next</a>
+				<% } %>
+			</div>
+			<% } %>
+
+			<!-- pagination if query is empty -->
+			<% if (!query) { %>
+			<div class="flex justify-center gap-4">
+				<% if (movies.page > 1) { %>
+				<a href="/movies?page=<%= movies.page - 1 %>" class="btn btn-accent btn-primary">Previous</a>
+				<% } %> <% if (movies.page < movies.total_pages) { %>
+				<a href="/movies?page=<%= movies.page + 1 %>" class="btn btn-accent btn-primary">Next</a>
+				<% } %>
+			</div>
+			<% } %>
+		</div>
+	</body>
+</html>

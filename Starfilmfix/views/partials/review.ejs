@@ -1,0 +1,40 @@
+<div class="flex flex-col p-8 space-y-2 bg-white border border-base-300 rounded-xl">
+	<div class="flex items-center justify-between mb-4">
+		<div class="flex items-start gap-4">
+			<div class="w-10 overflow-hidden rounded-full">
+				<img
+					src="https://ui-avatars.com/api/?name=<%= review.user.username %>"
+					alt="<%= review.user.username %>"
+					class="object-cover w-full h-full" />
+			</div>
+			<div>
+				<h5 class="font-bold"><%= review.user.fullname %></h5>
+				<p class="text-sm text-base-content/70"><%= review.user.username %></p>
+			</div>
+		</div>
+
+		<span class="text-sm text-base-content/70">
+			<%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric',
+			minute: 'numeric' }).format(review.updatedAt) %>
+		</span>
+	</div>
+
+	<%- include('star', { value: review.rating }) %>
+	<p class="text-base-content/60">
+		<%= review.content %>
+
+		<!-- edit status -->
+		<% if (new Date(review.updatedAt) > new Date(review.createdAt)) { %>
+		<span>(Edited)</span>
+		<% } %>
+	</p>
+</div>
+
+<% if (user.id === review.user.id) { %>
+<div class="flex items-center justify-end gap-4">
+	<form action="/reviews/<%= review.id %>?_method=DELETE" method="POST">
+		<button type="submit" class="btn btn-sm btn-dange btn-delete">Delete</button>
+	</form>
+	<a href="/reviews/<%= review.id %>" class="btn btn-sm ">Edit</a>
+</div>
+<% } %>

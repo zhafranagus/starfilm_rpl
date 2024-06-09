@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Movie Detail</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/css/styles.css" />
+	</head>
+
+	<body class="bg-color-white">
+		<div class="w-full max-w-6xl px-8 mx-auto">
+			<!--  Navbar -->
+			<%- include('../partials/navbar') %>
+
+			<!-- Flash Messages -->
+			<%- include('../partials/flash') %>
+
+            <section class="mb-20">
+				<h1 class="mb-2 text-4xl font-bold font-display">Edit Reviews</h1>
+				<p class="mb-8 text-base-content/60">
+					<!-- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam vel libero facilis ut consequuntur
+					quos ex saepe iste. Enim, laudantium. -->
+				</p>
+
+                <form action="/reviews/<%= review.id %>" method="POST" class="flex flex-col space-y-4">
+                    <input type="hidden" name="id" value="<%= review.id %>" />
+
+                    <label class="w-full form-control">
+                        <div class="label">
+                            <span class="label-text">Rating</span>
+                        </div>
+                        <div class="rating">
+                            <% for (let i = 1; i <= 5; i++) { %>
+                            <input type="radio" name="star" class="bg-orange-400 mask mask-star-2" <%= review.rating === i ?
+                                'checked' : '' %> />
+                            <% } %>
+                        </div>
+                    </label>
+
+                    <label class="w-full form-control">
+                        <div class="label">
+                            <span class="label-text">Content</span>
+                        </div>
+                        <textarea
+                            name="content"
+                            id="content"
+                            placeholder="Type here"
+                            class="w-full textarea textarea-bordered min-h-32"><%= review.content %></textarea>
+                    </label>
+
+                    <input type="hidden" name="rating" value="<%= review.rating %>" />
+                    <script>
+                        const rating = document.querySelectorAll('input[name="star"]');
+                        rating.forEach((star) => {
+                            star.addEventListener('change', (e) => {
+                                const index = Array.from(rating).indexOf(e.target);
+                                document.querySelector('input[name="rating"]').value = index + 1;
+                            });
+                        });
+                    </script>
+
+                    <button type="submit" class="w-full mb-4 text-white btn btn-primary">Update Review</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+                    

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="bg-cover-image h-full">
+  <div class="flex items-center justify-center h-screen">
+    <div class="w-full max-w-md rounded-xl container-login ">
+      <h1 class="mb-2 text-4xl font-bold font-display">Login</h1>
+      <p class="mb-8 text-base-content/60">
+        Login, and review 
+      </p>
+
+      <!--  Flash Messages -->
+      <%- include('../partials/flash') %>
+
+      <form action="/auth/login" method="POST" class="flex flex-col space-y-4">
+        <label class="w-full form-control">
+          <div class="label">
+            <span class="label-text">Your Username</span>
+          </div>
+          <input type="text" name="username" id="username" placeholder="Type here" class="w-full input input-bordered" />
+        </label>
+
+        <label class="w-full form-control">
+          <div class="label">
+            <span class="label-text">Your Password</span>
+          </div>
+          <input type="password" name="password" id="password" placeholder="Type here" class="w-full input input-bordered" />
+        </label>
+
+        <button type="submit" class="w-full mb-4 text-white btn btn-primary">Login</button>
+        <p class="text-center">
+          Don't have an account? <a href="/auth/register" class="font-medium text-primary">Register</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

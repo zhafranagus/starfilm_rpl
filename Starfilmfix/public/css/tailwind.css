@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	:root {
+		--font-poetsen: 'Poetsen One', sans-serif;
+		--font-nunito: 'Nunito', sans-serif;
+	}
+
+	body {
+		@apply font-body antialiased;
+	}
+
+	.btn {
+		@apply px-6 uppercase tracking-wide font-semibold;
+	}
+
+	.btn-sm {
+		@apply px-4 py-1 normal-case;
+	}
+
+	.input,
+	.textarea {
+		@apply bg-white text-base;
+	}
+
+	.label-text {
+		@apply text-base;
+	}
+}

@@ -1,0 +1,22 @@
+<a href="/movies/<%= movie.id %>">
+	<div class="overflow-hidden border rounded-xl border-base-300">
+		<div class="overflow-hidden aspect-square">
+			<% if (movie.poster_path) { %>
+			<img
+				src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>"
+				alt="<%= movie.title %>"
+				class="object-cover w-full h-full" />
+			<% } else { %>
+			<img
+				alt="<%= movie.title %>"
+				src="https://via.placeholder.com/500x500?text=Image+Not+Found"
+				class="object-cover w-full h-full" />
+			<% } %>
+		</div>
+		<div class="p-6">
+			<%- include('star', { value: movie.score }) %>
+			<h2 class="mb-2 font-bold"><%= movie.title %></h2>
+			<p class="text-base-content/60 line-clamp-3"><%= movie.overview %></p>
+		</div>
+	</div>
+</a>
